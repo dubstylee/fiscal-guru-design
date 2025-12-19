@@ -268,7 +268,6 @@ export function ScreenDesignFullscreen() {
             : [
                 { label: 'Dashboard', href: '/', isActive: true },
                 { label: 'Items', href: '/items' },
-                { label: 'Settings', href: '/settings' },
               ]
 
           const defaultUser = {

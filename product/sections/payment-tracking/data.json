@@ -1,0 +1,136 @@
+{
+  "_meta": {
+    "models": {
+      "Payment": "A transaction record showing money paid toward an invoice with date, amount breakdown, and clearing status.",
+      "Company": "A vendor, client, or service provider that the user does business with (referenced by name).",
+      "Account": "A financial account belonging to a Company (referenced by name)."
+    },
+    "relationships": [
+      "Each Payment belongs to an Account",
+      "Each Payment is associated with a Company",
+      "Payments can be marked as cleared or uncleared to track reconciliation status"
+    ]
+  },
+  "payments": [
+    {
+      "id": "pmt-001",
+      "date": "2025-01-15",
+      "companyName": "AWS",
+      "accountName": "Business Checking",
+      "amount": 487.32,
+      "cleared": false,
+      "notes": "January cloud infrastructure costs - higher than usual due to increased traffic",
+      "paymentMethod": "ACH"
+    },
+    {
+      "id": "pmt-002",
+      "date": "2025-01-10",
+      "companyName": "Verizon",
+      "accountName": "Business Credit Card",
+      "amount": 125.00,
+      "cleared": false,
+      "notes": "",
+      "paymentMethod": "Credit Card"
+    },
+    {
+      "id": "pmt-003",
+      "date": "2025-01-05",
+      "companyName": "Office Space Properties",
+      "accountName": "Business Checking",
+      "amount": 2500.00,
+      "cleared": false,
+      "notes": "Q1 2025 office rent",
+      "paymentMethod": "Check"
+    },
+    {
+      "id": "pmt-004",
+      "date": "2024-12-28",
+      "companyName": "Adobe",
+      "accountName": "Business Credit Card",
+      "amount": 79.99,
+      "cleared": true,
+      "notes": "Creative Cloud team subscription",
+      "paymentMethod": "Credit Card"
+    },
+    {
+      "id": "pmt-005",
+      "date": "2024-12-20",
+      "companyName": "AWS",
+      "accountName": "Business Checking",
+      "amount": 412.50,
+      "cleared": true,
+      "notes": "",
+      "paymentMethod": "ACH"
+    },
+    {
+      "id": "pmt-006",
+      "date": "2024-12-15",
+      "companyName": "GitHub",
+      "accountName": "Business Credit Card",
+      "amount": 21.00,
+      "cleared": true,
+      "notes": "Team plan - 3 seats",
+      "paymentMethod": "Credit Card"
+    },
+    {
+      "id": "pmt-007",
+      "date": "2024-12-10",
+      "companyName": "Verizon",
+      "accountName": "Business Credit Card",
+      "amount": 125.00,
+      "cleared": true,
+      "notes": "Monthly business internet and phone",
+      "paymentMethod": "Credit Card"
+    },
+    {
+      "id": "pmt-008",
+      "date": "2024-12-05",
+      "companyName": "Office Space Properties",
+      "accountName": "Business Checking",
+      "amount": 2500.00,
+      "cleared": true,
+      "notes": "",
+      "paymentMethod": "Check"
+    },
+    {
+      "id": "pmt-009",
+      "date": "2024-11-28",
+      "companyName": "Adobe",
+      "accountName": "Business Credit Card",
+      "amount": 79.99,
+      "cleared": true,
+      "notes": "Creative Cloud team subscription",
+      "paymentMethod": "Credit Card"
+    },
+    {
+      "id": "pmt-010",
+      "date": "2024-11-22",
+      "companyName": "Stripe",
+      "accountName": "Business Checking",
+      "amount": 1250.00,
+      "cleared": true,
+      "notes": "Payment processing fees for Q4 - included dispute resolution costs",
+      "paymentMethod": "Wire Transfer"
+    },
+    {
+      "id": "pmt-011",
+      "date": "2024-11-18",
+      "companyName": "AWS",
+      "accountName": "Business Checking",
+      "amount": 398.76,
+      "cleared": true,
+      "notes": "",
+      "paymentMethod": "ACH"
+    },
+    {
+      "id": "pmt-012",
+      "date": "2024-11-10",
+      "companyName": "Verizon",
+      "accountName": "Business Credit Card",
+      "amount": 125.00,
+      "cleared": true,
+      "notes": "Monthly business internet and phone",
+      "paymentMethod": "Credit Card"
+    }
+  ]
+}
