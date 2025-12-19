@@ -1,0 +1,769 @@
+{
+  "_meta": {
+    "models": {
+      "accounts": "A financial account belonging to a Company (checking, credit card, loan, etc.) with balance and account details.",
+      "invoices": "An individual bill or payment obligation with a specific due date and amount (either one-time or generated from a template).",
+      "payments": "A transaction record showing money paid toward an invoice with date, amount breakdown, and clearing status."
+    },
+    "relationships": [
+      "Each Account belongs to a Company",
+      "Each Account has many Invoices",
+      "Each Invoice belongs to an Account",
+      "Each Invoice has many Payments",
+      "Payments are aggregated to display the 12-month payment history chart"
+    ]
+  },
+  "accounts": [
+    {
+      "id": "acct-001",
+      "companyId": "comp-001",
+      "companyName": "Amazon Web Services",
+      "companyLogo": null,
+      "accountName": "AWS Business Account",
+      "accountNumber": "AWS-2024-4892",
+      "accountUrl": "https://console.aws.amazon.com",
+      "accountType": "Credit Card",
+      "status": "active",
+      "interestRate": null,
+      "dateOpened": "2023-03-15",
+      "balance": 487.32,
+      "notes": "Cloud infrastructure hosting for all production environments. Fluctuates based on traffic and storage usage.",
+      "contactInfo": {
+        "name": "AWS Support",
+        "email": "billing@aws.com",
+        "phone": "1-888-555-0100"
+      },
+      "addressInfo": {
+        "street": "410 Terry Avenue North",
+        "city": "Seattle",
+        "state": "WA",
+        "zip": "98109"
+      },
+      "accountLogo": null
+    },
+    {
+      "id": "acct-002",
+      "companyId": "comp-002",
+      "companyName": "Verizon Wireless",
+      "companyLogo": null,
+      "accountName": "Business Mobile Plan",
+      "accountNumber": "VZW-887-1234",
+      "accountUrl": "https://www.verizon.com/business",
+      "accountType": "Monthly Service",
+      "status": "active",
+      "interestRate": null,
+      "dateOpened": "2022-08-01",
+      "balance": 128.45,
+      "notes": "Three mobile lines for business use. Auto-pay enabled on 15th of each month.",
+      "contactInfo": {
+        "name": "Verizon Business Support",
+        "email": "businesssupport@verizon.com",
+        "phone": "1-800-555-0200"
+      },
+      "addressInfo": {
+        "street": "1095 Avenue of the Americas",
+        "city": "New York",
+        "state": "NY",
+        "zip": "10036"
+      },
+      "accountLogo": null
+    },
+    {
+      "id": "acct-003",
+      "companyId": "comp-003",
+      "companyName": "Adobe Creative Cloud",
+      "companyLogo": null,
+      "accountName": "Creative Cloud All Apps",
+      "accountNumber": "ADOBE-CC-8765",
+      "accountUrl": "https://adminconsole.adobe.com",
+      "accountType": "Subscription",
+      "status": "active",
+      "interestRate": null,
+      "dateOpened": "2023-01-10",
+      "balance": 54.99,
+      "notes": "Annual commitment with monthly billing. All Apps plan for design team.",
+      "contactInfo": {
+        "name": "Adobe Customer Care",
+        "email": "support@adobe.com",
+        "phone": "1-800-555-0300"
+      },
+      "addressInfo": {
+        "street": "345 Park Avenue",
+        "city": "San Jose",
+        "state": "CA",
+        "zip": "95110"
+      },
+      "accountLogo": null
+    },
+    {
+      "id": "acct-004",
+      "companyId": "comp-004",
+      "companyName": "State Farm Insurance",
+      "companyLogo": null,
+      "accountName": "Business Insurance Policy",
+      "accountNumber": "SF-2024-892",
+      "accountUrl": "https://www.statefarm.com/customer-care",
+      "accountType": "Insurance Premium",
+      "status": "active",
+      "interestRate": null,
+      "dateOpened": "2024-01-01",
+      "balance": 892.00,
+      "notes": "Business liability and property insurance. Quarterly billing. Agent: John Smith.",
+      "contactInfo": {
+        "name": "John Smith",
+        "email": "john.smith@statefarm.com",
+        "phone": "555-0123"
+      },
+      "addressInfo": {
+        "street": "1 State Farm Plaza",
+        "city": "Bloomington",
+        "state": "IL",
+        "zip": "61710"
+      },
+      "accountLogo": null
+    },
+    {
+      "id": "acct-005",
+      "companyId": "comp-005",
+      "companyName": "Pacific Gas & Electric",
+      "companyLogo": null,
+      "accountName": "Office Utilities",
+      "accountNumber": "PGE-1234567890",
+      "accountUrl": "https://www.pge.com/myhome",
+      "accountType": "Utility Service",
+      "status": "active",
+      "interestRate": null,
+      "dateOpened": "2022-05-15",
+      "balance": 198.34,
+      "notes": "Office electricity and gas service. Budget billing enabled.",
+      "contactInfo": {
+        "name": "PG&E Customer Service",
+        "email": "customerservice@pge.com",
+        "phone": "1-800-555-0400"
+      },
+      "addressInfo": {
+        "street": "77 Beale Street",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip": "94105"
+      },
+      "accountLogo": null
+    },
+    {
+      "id": "acct-007",
+      "companyId": "comp-007",
+      "companyName": "Chase Bank",
+      "companyLogo": null,
+      "accountName": "Business Checking",
+      "accountNumber": "CHK-0000-7890",
+      "accountUrl": "https://www.chase.com/business",
+      "accountType": "Checking Account",
+      "status": "active",
+      "interestRate": 0.01,
+      "dateOpened": "2021-11-20",
+      "balance": 25430.87,
+      "notes": "Primary business checking account for operating expenses.",
+      "contactInfo": {
+        "name": "Chase Business Banking",
+        "email": "businessbanking@chase.com",
+        "phone": "1-800-555-0500"
+      },
+      "addressInfo": {
+        "street": "383 Madison Avenue",
+        "city": "New York",
+        "state": "NY",
+        "zip": "10017"
+      },
+      "accountLogo": null
+    },
+    {
+      "id": "acct-008",
+      "companyId": "comp-007",
+      "companyName": "Chase Bank",
+      "companyLogo": null,
+      "accountName": "Business Credit Card",
+      "accountNumber": "CC-4892-2109",
+      "accountUrl": "https://www.chase.com/business/credit-cards",
+      "accountType": "Credit Card",
+      "status": "active",
+      "interestRate": 18.99,
+      "dateOpened": "2022-02-10",
+      "balance": 3245.12,
+      "notes": "Business expenses credit card with 2% cashback on purchases.",
+      "contactInfo": {
+        "name": "Chase Card Services",
+        "email": "cardservices@chase.com",
+        "phone": "1-800-555-0600"
+      },
+      "addressInfo": {
+        "street": "383 Madison Avenue",
+        "city": "New York",
+        "state": "NY",
+        "zip": "10017"
+      },
+      "accountLogo": null
+    },
+    {
+      "id": "acct-009",
+      "companyId": "comp-008",
+      "companyName": "Acme Design Studio",
+      "companyLogo": null,
+      "accountName": "Project Account",
+      "accountNumber": "ACME-RCV-2024",
+      "accountUrl": null,
+      "accountType": "Receivables",
+      "status": "active",
+      "interestRate": null,
+      "dateOpened": "2024-03-01",
+      "balance": -4500.00,
+      "notes": "Website redesign project. Net 30 payment terms. Negative balance indicates amount owed to us.",
+      "contactInfo": {
+        "name": "Sarah Johnson",
+        "email": "sarah@acmedesign.com",
+        "phone": "555-0789"
+      },
+      "addressInfo": {
+        "street": "1234 Design Boulevard",
+        "city": "Portland",
+        "state": "OR",
+        "zip": "97201"
+      },
+      "accountLogo": null
+    },
+    {
+      "id": "acct-010",
+      "companyId": "comp-010",
+      "companyName": "Global Supplies Co",
+      "companyLogo": null,
+      "accountName": "Corporate Account",
+      "accountNumber": "GSC-TRADE-5678",
+      "accountUrl": "https://www.globalsupplies.com/portal",
+      "accountType": "Trade Account",
+      "status": "inactive",
+      "interestRate": null,
+      "dateOpened": "2022-01-15",
+      "balance": 0.00,
+      "notes": "Former office supplies vendor. Switched to different supplier in Q4 2024. Account closed but retained for historical records.",
+      "contactInfo": {
+        "name": "Global Supplies Support",
+        "email": "support@globalsupplies.com",
+        "phone": "1-800-555-0700"
+      },
+      "addressInfo": {
+        "street": "5678 Commerce Street",
+        "city": "Dallas",
+        "state": "TX",
+        "zip": "75201"
+      },
+      "accountLogo": null
+    }
+  ],
+  "invoices": [
+    {
+      "id": "inv-001",
+      "accountId": "acct-001",
+      "invoiceNumber": "AWS-JAN-2025",
+      "amount": 487.32,
+      "dueDate": "2025-02-01",
+      "status": "pending",
+      "description": "AWS cloud services - January 2025",
+      "issuedDate": "2025-01-01"
+    },
+    {
+      "id": "inv-002",
+      "accountId": "acct-001",
+      "invoiceNumber": "AWS-DEC-2024",
+      "amount": 523.18,
+      "dueDate": "2025-01-01",
+      "status": "paid",
+      "description": "AWS cloud services - December 2024",
+      "issuedDate": "2024-12-01"
+    },
+    {
+      "id": "inv-003",
+      "accountId": "acct-002",
+      "invoiceNumber": "VZW-JAN-2025",
+      "amount": 128.45,
+      "dueDate": "2025-01-15",
+      "status": "paid",
+      "description": "Verizon business mobile - January 2025",
+      "issuedDate": "2025-01-01"
+    },
+    {
+      "id": "inv-004",
+      "accountId": "acct-002",
+      "invoiceNumber": "VZW-DEC-2024",
+      "amount": 128.45,
+      "dueDate": "2024-12-15",
+      "status": "paid",
+      "description": "Verizon business mobile - December 2024",
+      "issuedDate": "2024-12-01"
+    },
+    {
+      "id": "inv-005",
+      "accountId": "acct-003",
+      "invoiceNumber": "ADOBE-JAN-2025",
+      "amount": 54.99,
+      "dueDate": "2025-01-10",
+      "status": "paid",
+      "description": "Adobe Creative Cloud All Apps - January 2025",
+      "issuedDate": "2025-01-01"
+    },
+    {
+      "id": "inv-006",
+      "accountId": "acct-004",
+      "invoiceNumber": "SF-Q1-2025",
+      "amount": 892.00,
+      "dueDate": "2025-01-15",
+      "status": "paid",
+      "description": "State Farm business insurance - Q1 2025",
+      "issuedDate": "2025-01-01"
+    },
+    {
+      "id": "inv-007",
+      "accountId": "acct-005",
+      "invoiceNumber": "PGE-JAN-2025",
+      "amount": 198.34,
+      "dueDate": "2025-01-20",
+      "status": "pending",
+      "description": "PG&E office utilities - January 2025",
+      "issuedDate": "2025-01-05"
+    },
+    {
+      "id": "inv-008",
+      "accountId": "acct-005",
+      "invoiceNumber": "PGE-DEC-2024",
+      "amount": 212.89,
+      "dueDate": "2024-12-20",
+      "status": "paid",
+      "description": "PG&E office utilities - December 2024",
+      "issuedDate": "2024-12-05"
+    },
+    {
+      "id": "inv-009",
+      "accountId": "acct-008",
+      "invoiceNumber": "CHASE-CC-DEC-2024",
+      "amount": 3245.12,
+      "dueDate": "2025-01-05",
+      "status": "paid",
+      "description": "Chase business credit card - December 2024 statement",
+      "issuedDate": "2024-12-10"
+    },
+    {
+      "id": "inv-010",
+      "accountId": "acct-008",
+      "invoiceNumber": "CHASE-CC-NOV-2024",
+      "amount": 2876.45,
+      "dueDate": "2024-12-05",
+      "status": "paid",
+      "description": "Chase business credit card - November 2024 statement",
+      "issuedDate": "2024-11-10"
+    },
+    {
+      "id": "inv-011",
+      "accountId": "acct-009",
+      "invoiceNumber": "ACME-WEB-REDESIGN",
+      "amount": 4500.00,
+      "dueDate": "2024-12-15",
+      "status": "overdue",
+      "description": "Website redesign project - final invoice",
+      "issuedDate": "2024-11-15"
+    },
+    {
+      "id": "inv-012",
+      "accountId": "acct-001",
+      "invoiceNumber": "AWS-NOV-2024",
+      "amount": 498.67,
+      "dueDate": "2024-12-01",
+      "status": "paid",
+      "description": "AWS cloud services - November 2024",
+      "issuedDate": "2024-11-01"
+    },
+    {
+      "id": "inv-013",
+      "accountId": "acct-003",
+      "invoiceNumber": "ADOBE-DEC-2024",
+      "amount": 54.99,
+      "dueDate": "2024-12-10",
+      "status": "paid",
+      "description": "Adobe Creative Cloud All Apps - December 2024",
+      "issuedDate": "2024-12-01"
+    },
+    {
+      "id": "inv-014",
+      "accountId": "acct-005",
+      "invoiceNumber": "PGE-NOV-2024",
+      "amount": 187.56,
+      "dueDate": "2024-11-20",
+      "status": "paid",
+      "description": "PG&E office utilities - November 2024",
+      "issuedDate": "2024-11-05"
+    },
+    {
+      "id": "inv-015",
+      "accountId": "acct-002",
+      "invoiceNumber": "VZW-NOV-2024",
+      "amount": 128.45,
+      "dueDate": "2024-11-15",
+      "status": "paid",
+      "description": "Verizon business mobile - November 2024",
+      "issuedDate": "2024-11-01"
+    },
+    {
+      "id": "inv-016",
+      "accountId": "acct-008",
+      "invoiceNumber": "CHASE-CC-OCT-2024",
+      "amount": 3102.88,
+      "dueDate": "2024-11-05",
+      "status": "paid",
+      "description": "Chase business credit card - October 2024 statement",
+      "issuedDate": "2024-10-10"
+    },
+    {
+      "id": "inv-017",
+      "accountId": "acct-004",
+      "invoiceNumber": "SF-Q4-2024",
+      "amount": 892.00,
+      "dueDate": "2024-10-15",
+      "status": "paid",
+      "description": "State Farm business insurance - Q4 2024",
+      "issuedDate": "2024-10-01"
+    },
+    {
+      "id": "inv-018",
+      "accountId": "acct-001",
+      "invoiceNumber": "AWS-OCT-2024",
+      "amount": 512.34,
+      "dueDate": "2024-11-01",
+      "status": "paid",
+      "description": "AWS cloud services - October 2024",
+      "issuedDate": "2024-10-01"
+    }
+  ],
+  "payments": [
+    {
+      "id": "pay-001",
+      "invoiceId": "inv-002",
+      "accountId": "acct-001",
+      "amount": 523.18,
+      "date": "2024-12-28",
+      "cleared": true,
+      "method": "ACH"
+    },
+    {
+      "id": "pay-002",
+      "invoiceId": "inv-003",
+      "accountId": "acct-002",
+      "amount": 128.45,
+      "date": "2025-01-15",
+      "cleared": true,
+      "method": "Auto-pay"
+    },
+    {
+      "id": "pay-003",
+      "invoiceId": "inv-004",
+      "accountId": "acct-002",
+      "amount": 128.45,
+      "date": "2024-12-15",
+      "cleared": true,
+      "method": "Auto-pay"
+    },
+    {
+      "id": "pay-004",
+      "invoiceId": "inv-005",
+      "accountId": "acct-003",
+      "amount": 54.99,
+      "date": "2025-01-10",
+      "cleared": true,
+      "method": "Credit Card"
+    },
+    {
+      "id": "pay-005",
+      "invoiceId": "inv-006",
+      "accountId": "acct-004",
+      "amount": 892.00,
+      "date": "2025-01-12",
+      "cleared": true,
+      "method": "Check"
+    },
+    {
+      "id": "pay-006",
+      "invoiceId": "inv-008",
+      "accountId": "acct-005",
+      "amount": 212.89,
+      "date": "2024-12-18",
+      "cleared": true,
+      "method": "Auto-pay"
+    },
+    {
+      "id": "pay-007",
+      "invoiceId": "inv-009",
+      "accountId": "acct-008",
+      "amount": 3245.12,
+      "date": "2025-01-03",
+      "cleared": true,
+      "method": "ACH"
+    },
+    {
+      "id": "pay-008",
+      "invoiceId": "inv-010",
+      "accountId": "acct-008",
+      "amount": 2876.45,
+      "date": "2024-12-03",
+      "cleared": true,
+      "method": "ACH"
+    },
+    {
+      "id": "pay-009",
+      "invoiceId": "inv-012",
+      "accountId": "acct-001",
+      "amount": 498.67,
+      "date": "2024-11-28",
+      "cleared": true,
+      "method": "ACH"
+    },
+    {
+      "id": "pay-010",
+      "invoiceId": "inv-013",
+      "accountId": "acct-003",
+      "amount": 54.99,
+      "date": "2024-12-10",
+      "cleared": true,
+      "method": "Credit Card"
+    },
+    {
+      "id": "pay-011",
+      "invoiceId": "inv-014",
+      "accountId": "acct-005",
+      "amount": 187.56,
+      "date": "2024-11-18",
+      "cleared": true,
+      "method": "Auto-pay"
+    },
+    {
+      "id": "pay-012",
+      "invoiceId": "inv-015",
+      "accountId": "acct-002",
+      "amount": 128.45,
+      "date": "2024-11-15",
+      "cleared": true,
+      "method": "Auto-pay"
+    },
+    {
+      "id": "pay-013",
+      "invoiceId": "inv-016",
+      "accountId": "acct-008",
+      "amount": 3102.88,
+      "date": "2024-11-03",
+      "cleared": true,
+      "method": "ACH"
+    },
+    {
+      "id": "pay-014",
+      "invoiceId": "inv-017",
+      "accountId": "acct-004",
+      "amount": 892.00,
+      "date": "2024-10-12",
+      "cleared": true,
+      "method": "Check"
+    },
+    {
+      "id": "pay-015",
+      "invoiceId": "inv-018",
+      "accountId": "acct-001",
+      "amount": 512.34,
+      "date": "2024-10-28",
+      "cleared": true,
+      "method": "ACH"
+    },
+    {
+      "id": "pay-016",
+      "invoiceId": "inv-012",
+      "accountId": "acct-001",
+      "amount": 450.00,
+      "date": "2024-09-28",
+      "cleared": true,
+      "method": "ACH"
+    },
+    {
+      "id": "pay-017",
+      "invoiceId": "inv-015",
+      "accountId": "acct-002",
+      "amount": 128.45,
+      "date": "2024-10-15",
+      "cleared": true,
+      "method": "Auto-pay"
+    },
+    {
+      "id": "pay-018",
+      "invoiceId": "inv-013",
+      "accountId": "acct-003",
+      "amount": 54.99,
+      "date": "2024-11-10",
+      "cleared": true,
+      "method": "Credit Card"
+    },
+    {
+      "id": "pay-019",
+      "invoiceId": "inv-014",
+      "accountId": "acct-005",
+      "amount": 195.22,
+      "date": "2024-10-18",
+      "cleared": true,
+      "method": "Auto-pay"
+    },
+    {
+      "id": "pay-020",
+      "invoiceId": "inv-016",
+      "accountId": "acct-008",
+      "amount": 2987.56,
+      "date": "2024-10-03",
+      "cleared": true,
+      "method": "ACH"
+    },
+    {
+      "id": "pay-021",
+      "invoiceId": "inv-017",
+      "accountId": "acct-004",
+      "amount": 892.00,
+      "date": "2024-07-12",
+      "cleared": true,
+      "method": "Check"
+    },
+    {
+      "id": "pay-022",
+      "invoiceId": "inv-015",
+      "accountId": "acct-002",
+      "amount": 128.45,
+      "date": "2024-09-15",
+      "cleared": true,
+      "method": "Auto-pay"
+    },
+    {
+      "id": "pay-023",
+      "invoiceId": "inv-013",
+      "accountId": "acct-003",
+      "amount": 54.99,
+      "date": "2024-10-10",
+      "cleared": true,
+      "method": "Credit Card"
+    },
+    {
+      "id": "pay-024",
+      "invoiceId": "inv-014",
+      "accountId": "acct-005",
+      "amount": 178.90,
+      "date": "2024-09-18",
+      "cleared": true,
+      "method": "Auto-pay"
+    },
+    {
+      "id": "pay-025",
+      "invoiceId": "inv-016",
+      "accountId": "acct-008",
+      "amount": 3245.67,
+      "date": "2024-09-03",
+      "cleared": true,
+      "method": "ACH"
+    },
+    {
+      "id": "pay-026",
+      "invoiceId": "inv-015",
+      "accountId": "acct-002",
+      "amount": 128.45,
+      "date": "2024-08-15",
+      "cleared": true,
+      "method": "Auto-pay"
+    },
+    {
+      "id": "pay-027",
+      "invoiceId": "inv-013",
+      "accountId": "acct-003",
+      "amount": 54.99,
+      "date": "2024-09-10",
+      "cleared": true,
+      "method": "Credit Card"
+    },
+    {
+      "id": "pay-028",
+      "invoiceId": "inv-014",
+      "accountId": "acct-005",
+      "amount": 203.45,
+      "date": "2024-08-18",
+      "cleared": true,
+      "method": "Auto-pay"
+    },
+    {
+      "id": "pay-029",
+      "invoiceId": "inv-016",
+      "accountId": "acct-008",
+      "amount": 2765.89,
+      "date": "2024-08-03",
+      "cleared": true,
+      "method": "ACH"
+    },
+    {
+      "id": "pay-030",
+      "invoiceId": "inv-015",
+      "accountId": "acct-002",
+      "amount": 128.45,
+      "date": "2024-07-15",
+      "cleared": true,
+      "method": "Auto-pay"
+    },
+    {
+      "id": "pay-031",
+      "invoiceId": "inv-013",
+      "accountId": "acct-003",
+      "amount": 54.99,
+      "date": "2024-08-10",
+      "cleared": true,
+      "method": "Credit Card"
+    },
+    {
+      "id": "pay-032",
+      "invoiceId": "inv-014",
+      "accountId": "acct-005",
+      "amount": 189.34,
+      "date": "2024-07-18",
+      "cleared": true,
+      "method": "Auto-pay"
+    },
+    {
+      "id": "pay-033",
+      "invoiceId": "inv-016",
+      "accountId": "acct-008",
+      "amount": 3102.45,
+      "date": "2024-07-03",
+      "cleared": true,
+      "method": "ACH"
+    },
+    {
+      "id": "pay-034",
+      "invoiceId": "inv-015",
+      "accountId": "acct-002",
+      "amount": 128.45,
+      "date": "2024-06-15",
+      "cleared": true,
+      "method": "Auto-pay"
+    },
+    {
+      "id": "pay-035",
+      "invoiceId": "inv-013",
+      "accountId": "acct-003",
+      "amount": 54.99,
+      "date": "2024-07-10",
+      "cleared": true,
+      "method": "Credit Card"
+    },
+    {
+      "id": "pay-036",
+      "invoiceId": "inv-014",
+      "accountId": "acct-005",
+      "amount": 176.23,
+      "date": "2024-06-18",
+      "cleared": true,
+      "method": "Auto-pay"
+    }
+  ]
+}

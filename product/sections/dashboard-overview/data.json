@@ -1,0 +1,441 @@
+{
+  "_meta": {
+    "models": {
+      "companies": "A vendor, client, or service provider that you do business with (includes profile info, logos, contact details).",
+      "accounts": "A financial account belonging to a Company (checking, credit card, loan, etc.) with balance and account details.",
+      "invoices": "An individual bill or payment obligation with a specific due date and amount (either one-time or generated from a template).",
+      "payments": "A transaction record showing money paid toward an invoice with date, amount breakdown, and clearing status.",
+      "keyMetrics": "Aggregated financial health indicators showing active accounts, upcoming invoices, monthly spend, and uncleared payments.",
+      "paymentTrends": "Month-over-month payment totals for the last 6 months, used for trend visualization.",
+      "monthlyComparison": "Daily payment comparison between previous month (complete) and current month (month-to-date), including both daily amounts and cumulative totals."
+    },
+    "relationships": [
+      "Each Company has many Accounts",
+      "Each Account has many Invoices",
+      "Each Invoice has many Payments",
+      "Key Metrics are calculated from the current state of Accounts, Invoices, and Payments",
+      "Payment Trends aggregate all Payments by month",
+      "Monthly Comparison shows daily payment patterns for detailed spending analysis"
+    ]
+  },
+  "companies": [
+    {
+      "id": "comp-001",
+      "name": "Netflix",
+      "type": "vendor",
+      "contactEmail": "support@netflix.com",
+      "notes": "Monthly streaming subscription"
+    },
+    {
+      "id": "comp-002",
+      "name": "Amazon Web Services",
+      "type": "vendor",
+      "contactEmail": "billing@aws.com",
+      "notes": "Cloud hosting and services"
+    },
+    {
+      "id": "comp-003",
+      "name": "Pacific Gas & Electric",
+      "type": "vendor",
+      "contactEmail": "customerservice@pge.com",
+      "notes": "Utility - electricity and gas"
+    },
+    {
+      "id": "comp-004",
+      "name": "State Farm Insurance",
+      "type": "vendor",
+      "contactEmail": "policy@statefarm.com",
+      "notes": "Auto and home insurance"
+    },
+    {
+      "id": "comp-005",
+      "name": "Adobe Creative Cloud",
+      "type": "vendor",
+      "contactEmail": "support@adobe.com",
+      "notes": "Design software subscription"
+    },
+    {
+      "id": "comp-006",
+      "name": "Verizon Wireless",
+      "type": "vendor",
+      "contactEmail": "billing@verizon.com",
+      "notes": "Mobile phone service"
+    },
+    {
+      "id": "comp-007",
+      "name": "Chase Bank",
+      "type": "vendor",
+      "contactEmail": "support@chase.com",
+      "notes": "Business credit card"
+    }
+  ],
+  "accounts": [
+    {
+      "id": "acct-001",
+      "companyId": "comp-001",
+      "accountNumber": "****-4521",
+      "accountType": "subscription",
+      "balance": 0,
+      "status": "active"
+    },
+    {
+      "id": "acct-002",
+      "companyId": "comp-002",
+      "accountNumber": "AWS-8832",
+      "accountType": "service",
+      "balance": 0,
+      "status": "active"
+    },
+    {
+      "id": "acct-003",
+      "companyId": "comp-003",
+      "accountNumber": "PGE-5621-9",
+      "accountType": "utility",
+      "balance": 0,
+      "status": "active"
+    },
+    {
+      "id": "acct-004",
+      "companyId": "comp-004",
+      "accountNumber": "POL-9847352",
+      "accountType": "insurance",
+      "balance": 0,
+      "status": "active"
+    },
+    {
+      "id": "acct-005",
+      "companyId": "comp-005",
+      "accountNumber": "****-3389",
+      "accountType": "subscription",
+      "balance": 0,
+      "status": "active"
+    },
+    {
+      "id": "acct-006",
+      "companyId": "comp-006",
+      "accountNumber": "VZW-445-8821",
+      "accountType": "utility",
+      "balance": 0,
+      "status": "active"
+    },
+    {
+      "id": "acct-007",
+      "companyId": "comp-007",
+      "accountNumber": "****-9043",
+      "accountType": "credit",
+      "balance": 3240.85,
+      "status": "active"
+    },
+    {
+      "id": "acct-008",
+      "companyId": "comp-002",
+      "accountNumber": "AWS-2234",
+      "accountType": "service",
+      "balance": 0,
+      "status": "active"
+    }
+  ],
+  "invoices": [
+    {
+      "id": "inv-001",
+      "accountId": "acct-001",
+      "companyName": "Netflix",
+      "invoiceNumber": "NF-2024-12",
+      "amount": 15.99,
+      "dueDate": "2024-12-15",
+      "status": "upcoming",
+      "description": "Monthly subscription - Premium plan"
+    },
+    {
+      "id": "inv-002",
+      "accountId": "acct-002",
+      "companyName": "Amazon Web Services",
+      "invoiceNumber": "AWS-2024-11-8832",
+      "amount": 487.32,
+      "dueDate": "2024-12-01",
+      "status": "overdue",
+      "description": "Cloud hosting - November usage"
+    },
+    {
+      "id": "inv-003",
+      "accountId": "acct-003",
+      "companyName": "Pacific Gas & Electric",
+      "invoiceNumber": "PGE-112024",
+      "amount": 245.67,
+      "dueDate": "2024-12-20",
+      "status": "upcoming",
+      "description": "Electricity and gas - November billing"
+    },
+    {
+      "id": "inv-004",
+      "accountId": "acct-004",
+      "companyName": "State Farm Insurance",
+      "invoiceNumber": "POL-Q4-2024",
+      "amount": 892.00,
+      "dueDate": "2024-12-10",
+      "status": "upcoming",
+      "description": "Quarterly insurance premium"
+    },
+    {
+      "id": "inv-005",
+      "accountId": "acct-005",
+      "companyName": "Adobe Creative Cloud",
+      "invoiceNumber": "ADOBE-2024-12",
+      "amount": 54.99,
+      "dueDate": "2024-12-08",
+      "status": "upcoming",
+      "description": "Monthly subscription - All Apps"
+    },
+    {
+      "id": "inv-006",
+      "accountId": "acct-006",
+      "companyName": "Verizon Wireless",
+      "invoiceNumber": "VZW-112024",
+      "amount": 128.45,
+      "dueDate": "2024-12-05",
+      "status": "upcoming",
+      "description": "Mobile service - 3 lines"
+    },
+    {
+      "id": "inv-007",
+      "accountId": "acct-007",
+      "companyName": "Chase Bank",
+      "invoiceNumber": "CC-112024",
+      "amount": 3240.85,
+      "dueDate": "2024-12-22",
+      "status": "upcoming",
+      "description": "Credit card statement - November"
+    },
+    {
+      "id": "inv-008",
+      "accountId": "acct-001",
+      "companyName": "Netflix",
+      "invoiceNumber": "NF-2024-11",
+      "amount": 15.99,
+      "dueDate": "2024-11-15",
+      "status": "paid",
+      "description": "Monthly subscription - Premium plan"
+    },
+    {
+      "id": "inv-009",
+      "accountId": "acct-005",
+      "companyName": "Adobe Creative Cloud",
+      "invoiceNumber": "ADOBE-2024-11",
+      "amount": 54.99,
+      "dueDate": "2024-11-08",
+      "status": "paid",
+      "description": "Monthly subscription - All Apps"
+    },
+    {
+      "id": "inv-010",
+      "accountId": "acct-006",
+      "companyName": "Verizon Wireless",
+      "invoiceNumber": "VZW-102024",
+      "amount": 128.45,
+      "dueDate": "2024-11-05",
+      "status": "paid",
+      "description": "Mobile service - 3 lines"
+    },
+    {
+      "id": "inv-011",
+      "accountId": "acct-003",
+      "companyName": "Pacific Gas & Electric",
+      "invoiceNumber": "PGE-102024",
+      "amount": 198.34,
+      "dueDate": "2024-11-20",
+      "status": "paid",
+      "description": "Electricity and gas - October billing"
+    },
+    {
+      "id": "inv-012",
+      "accountId": "acct-008",
+      "companyName": "Amazon Web Services",
+      "invoiceNumber": "AWS-2024-10-2234",
+      "amount": 412.88,
+      "dueDate": "2024-11-01",
+      "status": "paid",
+      "description": "Cloud hosting - October usage"
+    }
+  ],
+  "payments": [
+    {
+      "id": "pay-001",
+      "invoiceId": "inv-008",
+      "companyName": "Netflix",
+      "amount": 15.99,
+      "paymentDate": "2024-11-14",
+      "cleared": true,
+      "paymentMethod": "credit_card"
+    },
+    {
+      "id": "pay-002",
+      "invoiceId": "inv-009",
+      "companyName": "Adobe Creative Cloud",
+      "amount": 54.99,
+      "paymentDate": "2024-11-08",
+      "cleared": true,
+      "paymentMethod": "credit_card"
+    },
+    {
+      "id": "pay-003",
+      "invoiceId": "inv-010",
+      "companyName": "Verizon Wireless",
+      "amount": 128.45,
+      "paymentDate": "2024-11-04",
+      "cleared": true,
+      "paymentMethod": "bank_transfer"
+    },
+    {
+      "id": "pay-004",
+      "invoiceId": "inv-011",
+      "companyName": "Pacific Gas & Electric",
+      "amount": 198.34,
+      "paymentDate": "2024-11-18",
+      "cleared": true,
+      "paymentMethod": "bank_transfer"
+    },
+    {
+      "id": "pay-005",
+      "invoiceId": "inv-012",
+      "companyName": "Amazon Web Services",
+      "amount": 412.88,
+      "paymentDate": "2024-10-30",
+      "cleared": true,
+      "paymentMethod": "credit_card"
+    },
+    {
+      "id": "pay-006",
+      "invoiceId": "inv-008",
+      "companyName": "Netflix",
+      "amount": 15.99,
+      "paymentDate": "2024-10-15",
+      "cleared": true,
+      "paymentMethod": "credit_card"
+    },
+    {
+      "id": "pay-007",
+      "invoiceId": "inv-009",
+      "companyName": "Adobe Creative Cloud",
+      "amount": 54.99,
+      "paymentDate": "2024-10-08",
+      "cleared": true,
+      "paymentMethod": "credit_card"
+    },
+    {
+      "id": "pay-008",
+      "invoiceId": "inv-010",
+      "companyName": "Verizon Wireless",
+      "amount": 128.45,
+      "paymentDate": "2024-10-03",
+      "cleared": true,
+      "paymentMethod": "bank_transfer"
+    },
+    {
+      "id": "pay-009",
+      "invoiceId": "inv-007",
+      "companyName": "Chase Bank",
+      "amount": 1250.00,
+      "paymentDate": "2024-11-25",
+      "cleared": false,
+      "paymentMethod": "bank_transfer"
+    }
+  ],
+  "keyMetrics": {
+    "activeAccounts": 8,
+    "upcomingInvoices": 7,
+    "totalMonthlySpend": 5065.27,
+    "unclearedPayments": 1
+  },
+  "paymentTrends": [
+    {
+      "month": "2024-07",
+      "monthLabel": "Jul",
+      "total": 3847.23
+    },
+    {
+      "month": "2024-08",
+      "monthLabel": "Aug",
+      "total": 4123.56
+    },
+    {
+      "month": "2024-09",
+      "monthLabel": "Sep",
+      "total": 3956.78
+    },
+    {
+      "month": "2024-10",
+      "monthLabel": "Oct",
+      "total": 4289.91
+    },
+    {
+      "month": "2024-11",
+      "monthLabel": "Nov",
+      "total": 4521.34
+    },
+    {
+      "month": "2024-12",
+      "monthLabel": "Dec",
+      "total": 1250.00
+    }
+  ],
+  "monthlyComparison": {
+    "previousMonth": {
+      "label": "November 2024",
+      "dailyPayments": [
+        { "day": 1, "amount": 0, "cumulative": 0 },
+        { "day": 2, "amount": 0, "cumulative": 0 },
+        { "day": 3, "amount": 0, "cumulative": 0 },
+        { "day": 4, "amount": 128.45, "cumulative": 128.45 },
+        { "day": 5, "amount": 0, "cumulative": 128.45 },
+        { "day": 6, "amount": 0, "cumulative": 128.45 },
+        { "day": 7, "amount": 0, "cumulative": 128.45 },
+        { "day": 8, "amount": 54.99, "cumulative": 183.44 },
+        { "day": 9, "amount": 0, "cumulative": 183.44 },
+        { "day": 10, "amount": 0, "cumulative": 183.44 },
+        { "day": 11, "amount": 0, "cumulative": 183.44 },
+        { "day": 12, "amount": 0, "cumulative": 183.44 },
+        { "day": 13, "amount": 0, "cumulative": 183.44 },
+        { "day": 14, "amount": 15.99, "cumulative": 199.43 },
+        { "day": 15, "amount": 0, "cumulative": 199.43 },
+        { "day": 16, "amount": 0, "cumulative": 199.43 },
+        { "day": 17, "amount": 0, "cumulative": 199.43 },
+        { "day": 18, "amount": 198.34, "cumulative": 397.77 },
+        { "day": 19, "amount": 0, "cumulative": 397.77 },
+        { "day": 20, "amount": 0, "cumulative": 397.77 },
+        { "day": 21, "amount": 0, "cumulative": 397.77 },
+        { "day": 22, "amount": 0, "cumulative": 397.77 },
+        { "day": 23, "amount": 0, "cumulative": 397.77 },
+        { "day": 24, "amount": 0, "cumulative": 397.77 },
+        { "day": 25, "amount": 1250.00, "cumulative": 1647.77 },
+        { "day": 26, "amount": 0, "cumulative": 1647.77 },
+        { "day": 27, "amount": 0, "cumulative": 1647.77 },
+        { "day": 28, "amount": 0, "cumulative": 1647.77 },
+        { "day": 29, "amount": 0, "cumulative": 1647.77 },
+        { "day": 30, "amount": 0, "cumulative": 1647.77 }
+      ]
+    },
+    "currentMonth": {
+      "label": "December 2024",
+      "dailyPayments": [
+        { "day": 1, "amount": 0, "cumulative": 0 },
+        { "day": 2, "amount": 0, "cumulative": 0 },
+        { "day": 3, "amount": 0, "cumulative": 0 },
+        { "day": 4, "amount": 0, "cumulative": 0 },
+        { "day": 5, "amount": 0, "cumulative": 0 },
+        { "day": 6, "amount": 0, "cumulative": 0 },
+        { "day": 7, "amount": 0, "cumulative": 0 },
+        { "day": 8, "amount": 0, "cumulative": 0 },
+        { "day": 9, "amount": 0, "cumulative": 0 },
+        { "day": 10, "amount": 0, "cumulative": 0 },
+        { "day": 11, "amount": 0, "cumulative": 0 },
+        { "day": 12, "amount": 0, "cumulative": 0 },
+        { "day": 13, "amount": 0, "cumulative": 0 },
+        { "day": 14, "amount": 0, "cumulative": 0 },
+        { "day": 15, "amount": 0, "cumulative": 0 },
+        { "day": 16, "amount": 0, "cumulative": 0 },
+        { "day": 17, "amount": 0, "cumulative": 0 },
+        { "day": 18, "amount": 0, "cumulative": 0 }
+      ]
+    }
+  }
+}

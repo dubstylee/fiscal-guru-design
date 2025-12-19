@@ -1,0 +1,183 @@
+{
+  "_meta": {
+    "models": {
+      "companies": "A vendor, client, or service provider that the user does business with (includes profile info, logos, contact details).",
+      "accounts": "A financial account belonging to a Company (checking, credit card, loan, etc.) with balance and account details."
+    },
+    "relationships": [
+      "Each Company can have one or more Accounts",
+      "Accounts are displayed on the company details page and link to account details"
+    ]
+  },
+  "companies": [
+    {
+      "id": "comp-001",
+      "name": "Amazon Web Services",
+      "url": "https://aws.amazon.com",
+      "notes": "Cloud infrastructure provider. Charges vary monthly based on usage. Contact: billing@aws.com for invoice questions.",
+      "status": "active",
+      "logo": null,
+      "accounts": [
+        {
+          "id": "acct-001",
+          "name": "AWS Business Account",
+          "type": "Credit Card",
+          "balance": 487.32,
+          "lastFour": "4892"
+        }
+      ]
+    },
+    {
+      "id": "comp-002",
+      "name": "Verizon Wireless",
+      "url": "https://www.verizon.com",
+      "notes": "Mobile service for 3 business lines. Auto-pay enabled.",
+      "status": "active",
+      "logo": null,
+      "accounts": [
+        {
+          "id": "acct-002",
+          "name": "Business Mobile Plan",
+          "type": "Monthly Service",
+          "balance": 128.45,
+          "lastFour": "1234"
+        }
+      ]
+    },
+    {
+      "id": "comp-003",
+      "name": "Adobe Creative Cloud",
+      "url": "https://www.adobe.com",
+      "notes": "All Apps subscription for design team. Annual commitment with monthly billing.",
+      "status": "active",
+      "logo": null,
+      "accounts": [
+        {
+          "id": "acct-003",
+          "name": "Creative Cloud All Apps",
+          "type": "Subscription",
+          "balance": 54.99,
+          "lastFour": "8765"
+        }
+      ]
+    },
+    {
+      "id": "comp-004",
+      "name": "State Farm Insurance",
+      "url": "https://www.statefarm.com",
+      "notes": "Business liability and property insurance. Policy #SF-2024-892. Agent: John Smith (555-0123).",
+      "status": "active",
+      "logo": null,
+      "accounts": [
+        {
+          "id": "acct-004",
+          "name": "Business Insurance Policy",
+          "type": "Insurance Premium",
+          "balance": 892.00,
+          "lastFour": null
+        }
+      ]
+    },
+    {
+      "id": "comp-005",
+      "name": "Pacific Gas & Electric",
+      "url": "https://www.pge.com",
+      "notes": "Office utilities - electricity and gas service. Account #1234567890.",
+      "status": "active",
+      "logo": null,
+      "accounts": [
+        {
+          "id": "acct-005",
+          "name": "Office Utilities",
+          "type": "Utility Service",
+          "balance": 198.34,
+          "lastFour": null
+        }
+      ]
+    },
+    {
+      "id": "comp-006",
+      "name": "Netflix",
+      "url": "https://www.netflix.com",
+      "notes": "Premium plan for office break room. Team building expense.",
+      "status": "active",
+      "logo": null,
+      "accounts": [
+        {
+          "id": "acct-006",
+          "name": "Premium Subscription",
+          "type": "Subscription",
+          "balance": 15.99,
+          "lastFour": "3456"
+        }
+      ]
+    },
+    {
+      "id": "comp-007",
+      "name": "Chase Bank",
+      "url": "https://www.chase.com",
+      "notes": "Primary business banking. Checking account for operating expenses and business credit card.",
+      "status": "active",
+      "logo": null,
+      "accounts": [
+        {
+          "id": "acct-007",
+          "name": "Business Checking",
+          "type": "Checking Account",
+          "balance": 25430.87,
+          "lastFour": "7890"
+        },
+        {
+          "id": "acct-008",
+          "name": "Business Credit Card",
+          "type": "Credit Card",
+          "balance": 3245.12,
+          "lastFour": "2109"
+        }
+      ]
+    },
+    {
+      "id": "comp-008",
+      "name": "Acme Design Studio",
+      "url": "https://www.acmedesign.com",
+      "notes": "Client - website redesign project. Net 30 payment terms. Contact: Sarah Johnson (sarah@acmedesign.com).",
+      "status": "active",
+      "logo": null,
+      "accounts": [
+        {
+          "id": "acct-009",
+          "name": "Project Account",
+          "type": "Receivables",
+          "balance": -4500.00,
+          "lastFour": null
+        }
+      ]
+    },
+    {
+      "id": "comp-009",
+      "name": "TechCorp Industries",
+      "url": "https://www.techcorp.io",
+      "notes": "Former client - consulting services completed in 2023. Account closed.",
+      "status": "inactive",
+      "logo": null,
+      "accounts": []
+    },
+    {
+      "id": "comp-010",
+      "name": "Global Supplies Co",
+      "url": "https://www.globalsupplies.com",
+      "notes": "Office supplies vendor. Switched to different supplier in Q4 2024.",
+      "status": "inactive",
+      "logo": null,
+      "accounts": [
+        {
+          "id": "acct-010",
+          "name": "Corporate Account",
+          "type": "Trade Account",
+          "balance": 0.00,
+          "lastFour": null
+        }
+      ]
+    }
+  ]
+}
