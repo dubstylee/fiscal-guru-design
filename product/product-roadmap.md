@@ -16,3 +16,6 @@ Record and monitor all payments with detailed breakdowns and comprehensive histo
 
 ### 5. Insights & Planning
 Budget planning, transaction history, watchlists, and analytics for proactive financial management.
+
+### 6. Settings
+User preferences, financial configuration, integration setup, and database connection management for the open-source application.
