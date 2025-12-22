@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { AlertTriangle, Database, TestTube } from 'lucide-react'
+import { AlertTriangle, Database, TestTube, Eye, EyeOff } from 'lucide-react'
 import type { DatabaseConfig, IntegrationProvider, IntegrationConfig } from '@/../product/sections/initial-setup/types'
 
 interface DatabaseStepProps {
@@ -24,6 +24,7 @@ const providerLabels: Record<IntegrationProvider, string> = {
 
 export function DatabaseStep({ config, onUpdate, onTest }: DatabaseStepProps) {
   const [localConfig, setLocalConfig] = useState<DatabaseConfig>(config)
+  const [showApiKey, setShowApiKey] = useState(false)
 
   const handleProviderChange = (provider: IntegrationProvider) => {
     let newConfig: IntegrationConfig = {}
@@ -137,13 +138,27 @@ export function DatabaseStep({ config, onUpdate, onTest }: DatabaseStepProps) {
             <label className="block text-sm font-semibold text-slate-900 dark:text-slate-50 mb-2">
               API Key
             </label>
-            <input
-              type="password"
-              value={supabaseConfig.apiKey || ''}
-              onChange={(e) => handleConfigChange('apiKey', e.target.value)}
-              placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-              className="w-full px-4 py-2.5 bg-stone-50 dark:bg-slate-950 border border-stone-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-50 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent"
-            />
+            <div className="relative">
+              <input
+                type={showApiKey ? 'text' : 'password'}
+                value={supabaseConfig.apiKey || ''}
+                onChange={(e) => handleConfigChange('apiKey', e.target.value)}
+                placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                className="w-full px-4 py-2.5 pr-10 bg-stone-50 dark:bg-slate-950 border border-stone-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-50 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:border-transparent"
+              />
+              <button
+                type="button"
+                onClick={() => setShowApiKey(!showApiKey)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-500 dark:text-stone-400 hover:text-slate-900 dark:hover:text-slate-50 transition-colors"
+                aria-label={showApiKey ? 'Hide API key' : 'Show API key'}
+              >
+                {showApiKey ? (
+                  <EyeOff className="w-4 h-4" />
+                ) : (
+                  <Eye className="w-4 h-4" />
+                )}
+              </button>
+            </div>
           </div>
         </div>
       )

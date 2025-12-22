@@ -54,13 +54,13 @@ export function InitialSetup({
       }
     }
 
-    // Validate identity provider on step 2 (if not skipped)
-    if (setupState.currentStep === 2 && identityProviderConfig && !identityProviderConfig.name) {
+    // Validate identity provider on step 2 (if configuring, must be complete)
+    if (setupState.currentStep === 2 && identityProviderConfig && (!identityProviderConfig.provider || !identityProviderConfig.name)) {
       return // Don't proceed if partially filled
     }
 
-    // Validate analytics on step 3 (if not skipped)
-    if (setupState.currentStep === 3 && analyticsConfig && !analyticsConfig.name) {
+    // Validate analytics on step 3 (if configuring, must be complete)
+    if (setupState.currentStep === 3 && analyticsConfig && (!analyticsConfig.provider || !analyticsConfig.name)) {
       return // Don't proceed if partially filled
     }
 
@@ -116,11 +116,12 @@ export function InitialSetup({
     if (setupState.currentStep === 1) {
       return databaseConfig.provider && databaseConfig.name
     }
+    // Optional steps: can proceed if null (skipped) or fully configured
     if (setupState.currentStep === 2) {
-      return identityProviderConfig === null || (identityProviderConfig && identityProviderConfig.name)
+      return identityProviderConfig === null || (identityProviderConfig && identityProviderConfig.provider && identityProviderConfig.name)
     }
     if (setupState.currentStep === 3) {
-      return analyticsConfig === null || (analyticsConfig && analyticsConfig.name)
+      return analyticsConfig === null || (analyticsConfig && analyticsConfig.provider && analyticsConfig.name)
     }
     return true
   }
