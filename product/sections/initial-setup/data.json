@@ -1,0 +1,43 @@
+{
+  "_meta": {
+    "models": {
+      "setupState": "Tracks the current progress through the setup wizard, including which step the user is on and whether each step has been completed.",
+      "databaseConfig": "The database integration configuration being set up in step 1. This is required for the application to function.",
+      "identityProviderConfig": "The identity provider integration configuration being set up in step 2. This step is optional and can be skipped.",
+      "analyticsConfig": "The analytics integration configuration being set up in step 3. This step is optional and can be skipped.",
+      "setupSummary": "A summary of all configured integrations shown in the final review step before completing setup."
+    },
+    "relationships": [
+      "SetupState tracks progress through the wizard steps",
+      "Each integration config (database, identity provider, analytics) is configured independently",
+      "SetupSummary aggregates all configured integrations for final review",
+      "Database configuration is required before setup can be completed"
+    ]
+  },
+  "setupState": {
+    "currentStep": 1,
+    "totalSteps": 4,
+    "stepsCompleted": {
+      "database": false,
+      "identityProvider": false,
+      "analytics": false
+    },
+    "stepsSkipped": {
+      "identityProvider": false,
+      "analytics": false
+    }
+  },
+  "databaseConfig": {
+    "provider": "",
+    "name": "",
+    "config": {}
+  },
+  "identityProviderConfig": null,
+  "analyticsConfig": null,
+  "setupSummary": {
+    "database": null,
+    "identityProvider": null,
+    "analytics": null
+  }
+}
+

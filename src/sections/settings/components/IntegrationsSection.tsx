@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { Plus, Database, TrendingUp } from 'lucide-react'
+import { useState, useRef, useEffect } from 'react'
+import { Plus, Database, TrendingUp, Shield } from 'lucide-react'
 import type { Integration, IntegrationProvider, IntegrationType } from '@/../product/sections/settings/types'
 import { IntegrationCard } from './IntegrationCard'
 
@@ -26,21 +26,30 @@ export function IntegrationsSection({
   const [integrationType, setIntegrationType] = useState<IntegrationType | ''>('')
   const [provider, setProvider] = useState<IntegrationProvider | ''>('')
   const [integrationName, setIntegrationName] = useState('')
+  const formRef = useRef<HTMLDivElement>(null)
 
-  const databaseProviders: IntegrationProvider[] = ['postgresql', 'supabase', 'mysql']
+  const databaseProviders: IntegrationProvider[] = ['postgresql', 'supabase', 'mysql', 'sqlite']
   const analyticsProviders: IntegrationProvider[] = ['posthog', 'datadog']
+  const identityProviders: IntegrationProvider[] = ['supabase-auth']
 
   const providerLabels: Record<IntegrationProvider, string> = {
     postgresql: 'PostgreSQL',
     supabase: 'Supabase',
     mysql: 'MySQL',
+    sqlite: 'SQLite',
     posthog: 'PostHog',
     datadog: 'Datadog',
+    'supabase-auth': 'Supabase Auth',
   }
 
-  const handleAddClick = () => {
+  // Group integrations by type
+  const databaseIntegrations = integrations.filter((i) => i.type === 'database')
+  const analyticsIntegrations = integrations.filter((i) => i.type === 'analytics')
+  const identityIntegrations = integrations.filter((i) => i.type === 'identity-provider')
+
+  const handleAddClick = (type?: IntegrationType) => {
     setIsAddingIntegration(true)
-    setIntegrationType('')
+    setIntegrationType(type || '')
     setProvider('')
     setIntegrationName('')
   }
@@ -65,10 +74,14 @@ export function IntegrationsSection({
       config = { projectUrl: '', apiKey: '', serviceRole: false }
     } else if (provider === 'mysql') {
       config = { host: '', port: 3306, database: '', username: '' }
+    } else if (provider === 'sqlite') {
+      config = { filePath: '' }
     } else if (provider === 'posthog') {
       config = { apiKey: '', host: 'https://app.posthog.com' }
     } else if (provider === 'datadog') {
       config = { apiKey: '', applicationKey: '', site: 'datadoghq.com' }
+    } else if (provider === 'supabase-auth') {
+      config = { projectUrl: '', anonKey: '' }
     }
 
     onAdd?.({
@@ -83,98 +96,145 @@ export function IntegrationsSection({
     handleCancel()
   }
 
-  const availableProviders = integrationType === 'database' ? databaseProviders : integrationType === 'analytics' ? analyticsProviders : []
+  const availableProviders = integrationType === 'database' ? databaseProviders : integrationType === 'analytics' ? analyticsProviders : integrationType === 'identity-provider' ? identityProviders : []
 
-  return (
-    <section>
-      <div className="mb-6">
-        <div className="flex items-center justify-between mb-1">
-          <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-50">
-            Integrations
-          </h2>
+  // Scroll to form when it appears
+  useEffect(() => {
+    if (isAddingIntegration && formRef.current) {
+      formRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [isAddingIntegration])
+
+  // Render a group section
+  const renderIntegrationGroup = (
+    type: IntegrationType,
+    title: string,
+    icon: React.ElementType,
+    groupIntegrations: Integration[]
+  ) => {
+    const Icon = icon
+
+    return (
+      <div key={type}>
+        {/* Section Header */}
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <Icon className="w-5 h-5 text-slate-700 dark:text-slate-300" />
+            <h3 className="text-lg font-bold text-slate-900 dark:text-slate-50">
+              {title}
+            </h3>
+            <span className="text-sm text-stone-500 dark:text-stone-400">
+              ({groupIntegrations.length})
+            </span>
+          </div>
           {!isAddingIntegration && (
             <button
-              onClick={handleAddClick}
-              className="px-4 py-2 bg-amber-500 dark:bg-amber-400 hover:bg-amber-600 dark:hover:bg-amber-500 text-white dark:text-slate-900 font-semibold rounded-lg transition-colors text-sm flex items-center gap-2"
+              onClick={() => handleAddClick(type)}
+              className="px-3 py-1.5 bg-amber-500 dark:bg-amber-400 hover:bg-amber-600 dark:hover:bg-amber-500 text-white dark:text-slate-900 font-semibold rounded-lg transition-colors text-sm flex items-center gap-2"
             >
               <Plus className="w-4 h-4" />
-              Add Integration
+              Add
             </button>
           )}
         </div>
-        <p className="text-sm text-stone-600 dark:text-stone-400">
-          Connect databases and analytics tools to your application
-        </p>
-      </div>
 
+        {/* Integration Cards or Empty State */}
+        {groupIntegrations.length === 0 ? (
+          <div className="bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-800 rounded-lg p-8 text-center mb-8">
+            <Icon className="w-10 h-10 text-stone-300 dark:text-stone-700 mx-auto mb-2" />
+            <p className="text-stone-600 dark:text-stone-400 text-sm mb-3">
+              No {title.toLowerCase()} configured yet.
+            </p>
+            {!isAddingIntegration && (
+              <button
+                onClick={() => handleAddClick(type)}
+                className="px-4 py-2 bg-amber-500 dark:bg-amber-400 hover:bg-amber-600 dark:hover:bg-amber-500 text-white dark:text-slate-900 font-semibold rounded-lg transition-colors text-sm inline-flex items-center gap-2"
+              >
+                <Plus className="w-4 h-4" />
+                Add {title.slice(0, -1)}
+              </button>
+            )}
+          </div>
+        ) : (
+          <div className="space-y-4 mb-8">
+            {groupIntegrations.map((integration) => (
+              <IntegrationCard
+                key={integration.id}
+                integration={integration}
+                onTest={onTest}
+                onToggle={onToggle}
+                onEdit={onEdit}
+                onDelete={onDelete}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    )
+  }
+
+  return (
+    <section>
       {/* Add Integration Form */}
       {isAddingIntegration && (
-        <div className="mb-6 bg-white dark:bg-slate-900 border-2 border-amber-500 dark:border-amber-400 rounded-lg p-6 shadow-lg">
+        <div ref={formRef} className="mb-8 bg-white dark:bg-slate-900 border-2 border-amber-500 dark:border-amber-400 rounded-lg p-6 shadow-lg">
           <form onSubmit={handleSubmit}>
             <h3 className="text-lg font-bold text-slate-900 dark:text-slate-50 mb-4">
               Add New Integration
             </h3>
 
             <div className="space-y-4">
-              {/* Integration Type */}
-              <div>
-                <label className="block text-sm font-semibold text-slate-900 dark:text-slate-50 mb-2">
-                  Integration Type
-                </label>
-                <div className="grid grid-cols-2 gap-3">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setIntegrationType('database')
-                      setProvider('')
-                    }}
-                    className={`p-4 rounded-lg border-2 transition-all ${
-                      integrationType === 'database'
-                        ? 'border-amber-500 dark:border-amber-400 bg-amber-50 dark:bg-amber-950'
-                        : 'border-stone-200 dark:border-slate-800 bg-stone-50 dark:bg-slate-950 hover:border-stone-300 dark:hover:border-slate-700'
-                    }`}
-                  >
-                    <Database className={`w-5 h-5 mx-auto mb-2 ${
-                      integrationType === 'database'
-                        ? 'text-amber-600 dark:text-amber-400'
-                        : 'text-stone-600 dark:text-stone-400'
-                    }`} />
-                    <span className={`block text-sm font-medium ${
-                      integrationType === 'database'
-                        ? 'text-amber-900 dark:text-amber-100'
-                        : 'text-slate-900 dark:text-slate-50'
-                    }`}>
-                      Database
-                    </span>
-                  </button>
+              {/* Integration Type - Only show if not pre-selected */}
+              {!integrationType && (
+                <div>
+                  <label className="block text-sm font-semibold text-slate-900 dark:text-slate-50 mb-2">
+                    Integration Type
+                  </label>
+                  <div className="grid grid-cols-3 gap-3">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIntegrationType('database')
+                        setProvider('')
+                      }}
+                      className="p-4 rounded-lg border-2 border-stone-200 dark:border-slate-800 bg-stone-50 dark:bg-slate-950 hover:border-stone-300 dark:hover:border-slate-700 transition-all"
+                    >
+                      <Database className="w-5 h-5 mx-auto mb-2 text-stone-600 dark:text-stone-400" />
+                      <span className="block text-sm font-medium text-slate-900 dark:text-slate-50">
+                        Database
+                      </span>
+                    </button>
 
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setIntegrationType('analytics')
-                      setProvider('')
-                    }}
-                    className={`p-4 rounded-lg border-2 transition-all ${
-                      integrationType === 'analytics'
-                        ? 'border-amber-500 dark:border-amber-400 bg-amber-50 dark:bg-amber-950'
-                        : 'border-stone-200 dark:border-slate-800 bg-stone-50 dark:bg-slate-950 hover:border-stone-300 dark:hover:border-slate-700'
-                    }`}
-                  >
-                    <TrendingUp className={`w-5 h-5 mx-auto mb-2 ${
-                      integrationType === 'analytics'
-                        ? 'text-amber-600 dark:text-amber-400'
-                        : 'text-stone-600 dark:text-stone-400'
-                    }`} />
-                    <span className={`block text-sm font-medium ${
-                      integrationType === 'analytics'
-                        ? 'text-amber-900 dark:text-amber-100'
-                        : 'text-slate-900 dark:text-slate-50'
-                    }`}>
-                      Analytics
-                    </span>
-                  </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIntegrationType('analytics')
+                        setProvider('')
+                      }}
+                      className="p-4 rounded-lg border-2 border-stone-200 dark:border-slate-800 bg-stone-50 dark:bg-slate-950 hover:border-stone-300 dark:hover:border-slate-700 transition-all"
+                    >
+                      <TrendingUp className="w-5 h-5 mx-auto mb-2 text-stone-600 dark:text-stone-400" />
+                      <span className="block text-sm font-medium text-slate-900 dark:text-slate-50">
+                        Analytics
+                      </span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIntegrationType('identity-provider')
+                        setProvider('')
+                      }}
+                      className="p-4 rounded-lg border-2 border-stone-200 dark:border-slate-800 bg-stone-50 dark:bg-slate-950 hover:border-stone-300 dark:hover:border-slate-700 transition-all"
+                    >
+                      <Shield className="w-5 h-5 mx-auto mb-2 text-stone-600 dark:text-stone-400" />
+                      <span className="block text-sm font-medium text-slate-900 dark:text-slate-50">
+                        Identity
+                      </span>
+                    </button>
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Provider Selection */}
               {integrationType && (
@@ -238,27 +298,11 @@ export function IntegrationsSection({
         </div>
       )}
 
-      {/* Integrations List */}
-      <div className="space-y-4">
-        {integrations.length === 0 ? (
-          <div className="bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-800 rounded-lg p-12 text-center">
-            <Database className="w-12 h-12 text-stone-300 dark:text-stone-700 mx-auto mb-3" />
-            <p className="text-stone-600 dark:text-stone-400 text-sm">
-              No integrations configured yet. Add your first integration to get started.
-            </p>
-          </div>
-        ) : (
-          integrations.map((integration) => (
-            <IntegrationCard
-              key={integration.id}
-              integration={integration}
-              onTest={onTest}
-              onToggle={onToggle}
-              onEdit={onEdit}
-              onDelete={onDelete}
-            />
-          ))
-        )}
+      {/* Integration Groups */}
+      <div className="space-y-8">
+        {renderIntegrationGroup('database', 'Database Integrations', Database, databaseIntegrations)}
+        {renderIntegrationGroup('analytics', 'Analytics Integrations', TrendingUp, analyticsIntegrations)}
+        {renderIntegrationGroup('identity-provider', 'Identity Provider Integrations', Shield, identityIntegrations)}
       </div>
     </section>
   )

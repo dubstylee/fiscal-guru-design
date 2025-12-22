@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Database, TrendingUp, Power, TestTube, Edit3, Trash2, ChevronDown, ChevronUp, CheckCircle, XCircle, AlertCircle } from 'lucide-react'
+import { Database, TrendingUp, Shield, Power, TestTube, Edit3, Trash2, ChevronDown, ChevronUp, CheckCircle, XCircle, AlertCircle } from 'lucide-react'
 import type { Integration } from '@/../product/sections/settings/types'
 
 interface IntegrationCardProps {
@@ -32,13 +32,15 @@ export function IntegrationCard({
     postgresql: 'PostgreSQL',
     supabase: 'Supabase',
     mysql: 'MySQL',
+    sqlite: 'SQLite',
     posthog: 'PostHog',
     datadog: 'Datadog',
+    'supabase-auth': 'Supabase Auth',
   }
 
   const status = statusConfig[integration.status]
   const StatusIcon = status.icon
-  const TypeIcon = integration.type === 'database' ? Database : TrendingUp
+  const TypeIcon = integration.type === 'database' ? Database : integration.type === 'analytics' ? TrendingUp : Shield
 
   return (
     <div className="bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-800 rounded-lg shadow-sm overflow-hidden transition-all">

@@ -3,7 +3,7 @@
     "models": {
       "user": "The current user's account information including email and name that can be updated through the settings interface.",
       "appearanceSettings": "User preferences for how the application looks and behaves, including theme, language, and display options.",
-      "integrations": "Third-party service connections configured by the user, including databases and analytics tools with their connection details and current status."
+      "integrations": "Third-party service connections configured by the user, including databases, analytics tools, and identity providers with their connection details and current status."
     },
     "relationships": [
       "All settings belong to the current user session",
@@ -99,6 +99,33 @@
       },
       "lastTested": null,
       "createdAt": "2023-10-20T14:00:00Z"
+    },
+    {
+      "id": "int-006",
+      "name": "User Authentication",
+      "type": "identity-provider",
+      "provider": "supabase-auth",
+      "status": "connected",
+      "enabled": true,
+      "config": {
+        "projectUrl": "https://fiscalguru.supabase.co",
+        "anonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZpc2NhbGd1cnUiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTYzMjc2OTIwMCwiZXhwIjoxOTQ4MzQ1MjAwfQ.abc123..."
+      },
+      "lastTested": "2024-01-15T09:30:00Z",
+      "createdAt": "2023-09-01T10:00:00Z"
+    },
+    {
+      "id": "int-007",
+      "name": "Local Development Database",
+      "type": "database",
+      "provider": "sqlite",
+      "status": "connected",
+      "enabled": true,
+      "config": {
+        "filePath": "/Users/sarah/Documents/fiscal-guru/data/fiscal_guru.db"
+      },
+      "lastTested": "2024-01-15T16:20:00Z",
+      "createdAt": "2024-01-10T11:00:00Z"
     }
   ]
 }

@@ -14,9 +14,9 @@ export interface AppearanceSettings {
   displayDensity: 'compact' | 'comfortable' | 'spacious'
 }
 
-export type IntegrationType = 'database' | 'analytics'
+export type IntegrationType = 'database' | 'analytics' | 'identity-provider'
 
-export type IntegrationProvider = 'postgresql' | 'supabase' | 'mysql' | 'posthog' | 'datadog'
+export type IntegrationProvider = 'postgresql' | 'supabase' | 'mysql' | 'sqlite' | 'posthog' | 'datadog' | 'supabase-auth'
 
 export type IntegrationStatus = 'connected' | 'disconnected' | 'error' | 'testing'
 
@@ -41,6 +41,10 @@ export interface MySQLConfig {
   username: string
 }
 
+export interface SQLiteConfig {
+  filePath: string
+}
+
 export interface PostHogConfig {
   apiKey: string
   host: string
@@ -52,12 +56,19 @@ export interface DatadogConfig {
   site: string
 }
 
+export interface SupabaseAuthConfig {
+  projectUrl: string
+  anonKey: string
+}
+
 export type IntegrationConfig =
   | PostgreSQLConfig
   | SupabaseConfig
   | MySQLConfig
+  | SQLiteConfig
   | PostHogConfig
   | DatadogConfig
+  | SupabaseAuthConfig
 
 export interface Integration {
   id: string

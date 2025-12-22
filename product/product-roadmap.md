@@ -19,3 +19,6 @@ Budget planning, transaction history, watchlists, and analytics for proactive fi
 
 ### 6. Settings
 User preferences, financial configuration, integration setup, and database connection management for the open-source application.
+
+### 7. Initial Setup
+A multi-step wizard for first-time users to configure their Fiscal Guru instance with database, identity provider, and analytics integrations.
