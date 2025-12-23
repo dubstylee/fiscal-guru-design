@@ -1,0 +1,131 @@
+{
+  "_meta": {
+    "models": {
+      "user": "The current user's account information including email and name that can be updated through the settings interface.",
+      "appearanceSettings": "User preferences for how the application looks and behaves, including theme, language, and display options.",
+      "integrations": "Third-party service connections configured by the user, including databases, analytics tools, and identity providers with their connection details and current status."
+    },
+    "relationships": [
+      "All settings belong to the current user session",
+      "Each Integration contains connection-specific configuration fields based on its type",
+      "AppearanceSettings controls the visual presentation of the entire application for the user"
+    ]
+  },
+  "user": {
+    "id": "user-001",
+    "name": "Sarah Mitchell",
+    "email": "sarah.mitchell@example.com"
+  },
+  "appearanceSettings": {
+    "theme": "dark",
+    "language": "en",
+    "displayDensity": "comfortable"
+  },
+  "integrations": [
+    {
+      "id": "int-001",
+      "name": "Production Database",
+      "type": "database",
+      "provider": "postgresql",
+      "status": "connected",
+      "enabled": true,
+      "config": {
+        "host": "db.production.example.com",
+        "port": 5432,
+        "database": "fiscal_guru_prod",
+        "username": "app_user",
+        "sslMode": "require"
+      },
+      "lastTested": "2024-01-15T14:23:00Z",
+      "createdAt": "2023-11-01T09:00:00Z"
+    },
+    {
+      "id": "int-002",
+      "name": "Staging Database",
+      "type": "database",
+      "provider": "supabase",
+      "status": "connected",
+      "enabled": true,
+      "config": {
+        "projectUrl": "https://xyzproject.supabase.co",
+        "apiKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+        "serviceRole": true
+      },
+      "lastTested": "2024-01-14T08:15:00Z",
+      "createdAt": "2023-12-10T16:30:00Z"
+    },
+    {
+      "id": "int-003",
+      "name": "Analytics Tracking",
+      "type": "analytics",
+      "provider": "posthog",
+      "status": "connected",
+      "enabled": true,
+      "config": {
+        "apiKey": "phc_1234567890abcdefghijklmnopqrstuvwxyz",
+        "host": "https://app.posthog.com"
+      },
+      "lastTested": "2024-01-15T10:45:00Z",
+      "createdAt": "2023-11-15T11:20:00Z"
+    },
+    {
+      "id": "int-004",
+      "name": "Performance Monitoring",
+      "type": "analytics",
+      "provider": "datadog",
+      "status": "error",
+      "enabled": true,
+      "config": {
+        "apiKey": "dd1234567890abcdef",
+        "applicationKey": "app9876543210fedcba",
+        "site": "datadoghq.com"
+      },
+      "lastTested": "2024-01-15T12:00:00Z",
+      "lastError": "Authentication failed: Invalid API key",
+      "createdAt": "2024-01-05T13:45:00Z"
+    },
+    {
+      "id": "int-005",
+      "name": "Development Database",
+      "type": "database",
+      "provider": "mysql",
+      "status": "disconnected",
+      "enabled": false,
+      "config": {
+        "host": "localhost",
+        "port": 3306,
+        "database": "fiscal_guru_dev",
+        "username": "dev_user"
+      },
+      "lastTested": null,
+      "createdAt": "2023-10-20T14:00:00Z"
+    },
+    {
+      "id": "int-006",
+      "name": "User Authentication",
+      "type": "identity-provider",
+      "provider": "supabase-auth",
+      "status": "connected",
+      "enabled": true,
+      "config": {
+        "projectUrl": "https://fiscalguru.supabase.co",
+        "anonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZpc2NhbGd1cnUiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTYzMjc2OTIwMCwiZXhwIjoxOTQ4MzQ1MjAwfQ.abc123..."
+      },
+      "lastTested": "2024-01-15T09:30:00Z",
+      "createdAt": "2023-09-01T10:00:00Z"
+    },
+    {
+      "id": "int-007",
+      "name": "Local Development Database",
+      "type": "database",
+      "provider": "sqlite",
+      "status": "connected",
+      "enabled": true,
+      "config": {
+        "filePath": "/Users/sarah/Documents/fiscal-guru/data/fiscal_guru.db"
+      },
+      "lastTested": "2024-01-15T16:20:00Z",
+      "createdAt": "2024-01-10T11:00:00Z"
+    }
+  ]
+}

@@ -1,0 +1,273 @@
+{
+  "_meta": {
+    "models": {
+      "SpendingCategory": "Custom categories for organizing and analyzing spending patterns (e.g., Cloud Services, Office Rent, Utilities).",
+      "Budget": "User-defined spending limits for custom categories with tracking of actual vs. budgeted amounts.",
+      "SpendingData": "Aggregated spending metrics over different time periods for analytics visualizations.",
+      "Invoice": "An individual bill or payment obligation with a specific due date and amount (used for upcoming invoices).",
+      "Payment": "A transaction record showing money paid toward an invoice (used for spending analytics history)."
+    },
+    "relationships": [
+      "Each Budget is associated with a SpendingCategory",
+      "SpendingData aggregates Payment records by category and payment method",
+      "Invoices appear in the upcoming invoices list when they have future due dates",
+      "Payments are grouped by category to calculate budget progress"
+    ]
+  },
+  "spendingCategories": [
+    {
+      "id": "cat-001",
+      "name": "Cloud Services",
+      "color": "blue",
+      "icon": "cloud"
+    },
+    {
+      "id": "cat-002",
+      "name": "Office & Facilities",
+      "color": "green",
+      "icon": "building"
+    },
+    {
+      "id": "cat-003",
+      "name": "Software & Tools",
+      "color": "purple",
+      "icon": "code"
+    },
+    {
+      "id": "cat-004",
+      "name": "Professional Services",
+      "color": "orange",
+      "icon": "briefcase"
+    },
+    {
+      "id": "cat-005",
+      "name": "Utilities & Communications",
+      "color": "cyan",
+      "icon": "signal"
+    },
+    {
+      "id": "cat-006",
+      "name": "Uncategorized",
+      "color": "gray",
+      "icon": "question"
+    }
+  ],
+  "budgets": [
+    {
+      "id": "bud-001",
+      "categoryId": "cat-001",
+      "categoryName": "Cloud Services",
+      "monthlyLimit": 1500.00,
+      "currentSpending": 1385.08,
+      "transactionCount": 3,
+      "lastUpdated": "2025-01-15"
+    },
+    {
+      "id": "bud-002",
+      "categoryId": "cat-002",
+      "categoryName": "Office & Facilities",
+      "monthlyLimit": 3000.00,
+      "currentSpending": 2500.00,
+      "transactionCount": 1,
+      "lastUpdated": "2025-01-05"
+    },
+    {
+      "id": "bud-003",
+      "categoryId": "cat-003",
+      "categoryName": "Software & Tools",
+      "monthlyLimit": 500.00,
+      "currentSpending": 225.99,
+      "transactionCount": 3,
+      "lastUpdated": "2024-12-28"
+    },
+    {
+      "id": "bud-004",
+      "categoryId": "cat-004",
+      "categoryName": "Professional Services",
+      "monthlyLimit": 2000.00,
+      "currentSpending": 1250.00,
+      "transactionCount": 1,
+      "lastUpdated": "2024-11-22"
+    },
+    {
+      "id": "bud-005",
+      "categoryId": "cat-005",
+      "categoryName": "Utilities & Communications",
+      "monthlyLimit": 400.00,
+      "currentSpending": 375.00,
+      "transactionCount": 3,
+      "lastUpdated": "2025-01-10"
+    },
+    {
+      "id": "bud-006",
+      "categoryId": "cat-006",
+      "categoryName": "Uncategorized",
+      "monthlyLimit": 1000.00,
+      "currentSpending": 0.00,
+      "transactionCount": 0,
+      "lastUpdated": "2025-01-01"
+    }
+  ],
+  "spendingData": {
+    "period30Days": {
+      "totalSpent": 5735.07,
+      "averagePerDay": 191.17,
+      "transactionCount": 11,
+      "byCategory": [
+        { "categoryId": "cat-001", "categoryName": "Cloud Services", "amount": 1385.08, "percentage": 24.15 },
+        { "categoryId": "cat-002", "categoryName": "Office & Facilities", "amount": 2500.00, "percentage": 43.59 },
+        { "categoryId": "cat-003", "categoryName": "Software & Tools", "amount": 225.99, "percentage": 3.94 },
+        { "categoryId": "cat-005", "categoryName": "Utilities & Communications", "amount": 375.00, "percentage": 6.54 },
+        { "categoryId": "cat-004", "categoryName": "Professional Services", "amount": 1250.00, "percentage": 21.78 }
+      ],
+      "byPaymentMethod": [
+        { "method": "ACH", "amount": 3637.32, "percentage": 63.43 },
+        { "method": "Credit Card", "amount": 850.75, "percentage": 14.83 },
+        { "method": "Check", "amount": 2500.00, "percentage": 43.59 },
+        { "method": "Wire Transfer", "amount": 1250.00, "percentage": 21.78 }
+      ],
+      "dailyTrend": [
+        { "date": "2024-12-16", "amount": 0 },
+        { "date": "2024-12-17", "amount": 0 },
+        { "date": "2024-12-18", "amount": 0 },
+        { "date": "2024-12-19", "amount": 412.50 },
+        { "date": "2024-12-20", "amount": 0 },
+        { "date": "2024-12-21", "amount": 0 },
+        { "date": "2024-12-22", "amount": 0 },
+        { "date": "2024-12-23", "amount": 0 },
+        { "date": "2024-12-24", "amount": 0 },
+        { "date": "2024-12-25", "amount": 0 },
+        { "date": "2024-12-26", "amount": 0 },
+        { "date": "2024-12-27", "amount": 79.99 },
+        { "date": "2024-12-28", "amount": 0 },
+        { "date": "2024-12-29", "amount": 0 },
+        { "date": "2024-12-30", "amount": 0 },
+        { "date": "2024-12-31", "amount": 0 },
+        { "date": "2025-01-01", "amount": 0 },
+        { "date": "2025-01-02", "amount": 0 },
+        { "date": "2025-01-03", "amount": 0 },
+        { "date": "2025-01-04", "amount": 2500.00 },
+        { "date": "2025-01-05", "amount": 0 },
+        { "date": "2025-01-06", "amount": 0 },
+        { "date": "2025-01-07", "amount": 0 },
+        { "date": "2025-01-08", "amount": 0 },
+        { "date": "2025-01-09", "amount": 125.00 },
+        { "date": "2025-01-10", "amount": 0 },
+        { "date": "2025-01-11", "amount": 0 },
+        { "date": "2025-01-12", "amount": 0 },
+        { "date": "2025-01-13", "amount": 0 },
+        { "date": "2025-01-14", "amount": 487.32 }
+      ]
+    },
+    "period60Days": {
+      "totalSpent": 8747.31,
+      "averagePerDay": 145.79,
+      "transactionCount": 14,
+      "byCategory": [
+        { "categoryId": "cat-001", "categoryName": "Cloud Services", "amount": 2185.34, "percentage": 24.98 },
+        { "categoryId": "cat-002", "categoryName": "Office & Facilities", "amount": 5000.00, "percentage": 57.16 },
+        { "categoryId": "cat-003", "categoryName": "Software & Tools", "amount": 431.97, "percentage": 4.94 },
+        { "categoryId": "cat-005", "categoryName": "Utilities & Communications", "amount": 625.00, "percentage": 7.14 },
+        { "categoryId": "cat-004", "categoryName": "Professional Services", "amount": 1250.00, "percentage": 14.29 }
+      ],
+      "byPaymentMethod": [
+        { "method": "ACH", "amount": 5447.66, "percentage": 62.27 },
+        { "method": "Credit Card", "amount": 1182.71, "percentage": 13.52 },
+        { "method": "Check", "amount": 5000.00, "percentage": 57.16 },
+        { "method": "Wire Transfer", "amount": 1250.00, "percentage": 14.29 }
+      ]
+    },
+    "period90Days": {
+      "totalSpent": 11234.83,
+      "averagePerDay": 124.83,
+      "transactionCount": 18,
+      "byCategory": [
+        { "categoryId": "cat-001", "categoryName": "Cloud Services", "amount": 2984.10, "percentage": 26.56 },
+        { "categoryId": "cat-002", "categoryName": "Office & Facilities", "amount": 5000.00, "percentage": 44.51 },
+        { "categoryId": "cat-003", "categoryName": "Software & Tools", "amount": 511.96, "percentage": 4.56 },
+        { "categoryId": "cat-005", "categoryName": "Utilities & Communications", "amount": 750.00, "percentage": 6.68 },
+        { "categoryId": "cat-004", "categoryName": "Professional Services", "amount": 1250.00, "percentage": 11.13 }
+      ],
+      "byPaymentMethod": [
+        { "method": "ACH", "amount": 6845.42, "percentage": 60.93 },
+        { "method": "Credit Card", "amount": 1514.67, "percentage": 13.48 },
+        { "method": "Check", "amount": 5000.00, "percentage": 44.51 },
+        { "method": "Wire Transfer", "amount": 1250.00, "percentage": 11.13 }
+      ]
+    }
+  },
+  "upcomingInvoices": [
+    {
+      "id": "inv-201",
+      "companyName": "AWS",
+      "accountName": "Business Checking",
+      "amount": 485.00,
+      "dueDate": "2025-02-15",
+      "daysUntilDue": 27,
+      "status": "pending"
+    },
+    {
+      "id": "inv-202",
+      "companyName": "Office Space Properties",
+      "accountName": "Business Checking",
+      "amount": 2500.00,
+      "dueDate": "2025-02-01",
+      "daysUntilDue": 13,
+      "status": "pending"
+    },
+    {
+      "id": "inv-203",
+      "companyName": "Adobe",
+      "accountName": "Business Credit Card",
+      "amount": 79.99,
+      "dueDate": "2025-01-28",
+      "daysUntilDue": 9,
+      "status": "pending"
+    },
+    {
+      "id": "inv-204",
+      "companyName": "Verizon",
+      "accountName": "Business Credit Card",
+      "amount": 125.00,
+      "dueDate": "2025-02-10",
+      "daysUntilDue": 22,
+      "status": "pending"
+    },
+    {
+      "id": "inv-205",
+      "companyName": "GitHub",
+      "accountName": "Business Credit Card",
+      "amount": 21.00,
+      "dueDate": "2025-02-15",
+      "daysUntilDue": 27,
+      "status": "pending"
+    },
+    {
+      "id": "inv-206",
+      "companyName": "Stripe",
+      "accountName": "Business Checking",
+      "amount": 1350.00,
+      "dueDate": "2025-02-22",
+      "daysUntilDue": 34,
+      "status": "pending"
+    },
+    {
+      "id": "inv-207",
+      "companyName": "Netlify",
+      "accountName": "Business Credit Card",
+      "amount": 19.00,
+      "dueDate": "2025-01-25",
+      "daysUntilDue": 6,
+      "status": "pending"
+    },
+    {
+      "id": "inv-208",
+      "companyName": "Office Space Properties",
+      "accountName": "Business Checking",
+      "amount": 2500.00,
+      "dueDate": "2025-03-01",
+      "daysUntilDue": 41,
+      "status": "pending"
+    }
+  ]
+}
